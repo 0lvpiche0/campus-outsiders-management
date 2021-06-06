@@ -1,0 +1,6 @@
+{
+    "mysqlDb"  : "campus-outsiders-management",
+    "username" : "root",
+    "password" : "lipincheng",
+    "charset"  : "utf8"
+}
