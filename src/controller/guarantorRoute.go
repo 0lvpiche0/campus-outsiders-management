@@ -63,7 +63,6 @@ func guarantorLogin(c *fiber.Ctx) error {
 }
 
 func guarantorRegister(c *fiber.Ctx) error {
-
 	user := c.Locals("user").(*jwt.Token)
 
 	if user == nil {
@@ -71,18 +70,25 @@ func guarantorRegister(c *fiber.Ctx) error {
 	}
 	claims := user.Claims.(jwt.MapClaims)
 	if claims["permission"] == nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 
 	permission := int(claims["permission"].(float64))
 	id := int(claims["id"].(float64))
 	if permission != 1 {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 
 	var guarantor_new model.Guarantor
 	if err := c.BodyParser(&guarantor_new); err != nil {
-		return nil
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+	has, err := engin.Exist(&model.Guarantor{Username: guarantor_new.Username})
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	if !has {
+		return c.SendStatus(999)
 	}
 	guarantor_new.Creator = id
 	hash, err := bcrypt.GenerateFromPassword([]byte(guarantor_new.Password), bcrypt.DefaultCost)
@@ -118,8 +124,7 @@ func guarantorUpdatePassword(c *fiber.Ctx) error {
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(guarantor.Password), []byte(old_password))
 	if err != nil {
-		fmt.Println("password err")
-		return err
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	hash, err := bcrypt.GenerateFromPassword([]byte(new_password), bcrypt.DefaultCost)
 	if err != nil {
@@ -128,7 +133,7 @@ func guarantorUpdatePassword(c *fiber.Ctx) error {
 	}
 	guarantor.Password = string(hash)
 	if _, err := engin.Update(&guarantor); err != nil {
-		return err
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	return c.SendStatus(fiber.StatusAccepted)
 }
