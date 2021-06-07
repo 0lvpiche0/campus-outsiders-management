@@ -69,7 +69,7 @@ func adminRegister(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
-	if !has {
+	if has {
 		return c.SendStatus(999)
 	}
 	if admin_new.Permission > 1 {

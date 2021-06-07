@@ -64,7 +64,6 @@ func guarantorLogin(c *fiber.Ctx) error {
 
 func guarantorRegister(c *fiber.Ctx) error {
 	user := c.Locals("user").(*jwt.Token)
-
 	if user == nil {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
@@ -87,7 +86,7 @@ func guarantorRegister(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
-	if !has {
+	if has {
 		return c.SendStatus(999)
 	}
 	guarantor_new.Creator = id
