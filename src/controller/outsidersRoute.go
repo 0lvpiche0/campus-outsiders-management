@@ -17,7 +17,7 @@ import (
 // }
 
 func searchOutsidersByID_card(c *fiber.Ctx) error {
-	ID_card := c.BodyParser("ID_card")
+	ID_card := c.Params("ID_card")
 	var outsider model.Outsiders
 	has, err := engin.Where("ID_card = ?", ID_card).Desc("apply_entry").Get(&outsider)
 	if err != nil {
