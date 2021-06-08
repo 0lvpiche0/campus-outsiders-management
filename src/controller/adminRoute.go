@@ -26,7 +26,7 @@ func adminLogin(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	if !has {
-		return c.SendStatus(fiber.StatusNotAcceptable)
+		return c.SendStatus(fiber.StatusNotFound)
 	}
 	// fmt.Println(admin)
 	err = bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(login_admin.Password)) //验证（对比）
@@ -50,7 +50,7 @@ func adminLogin(c *fiber.Ctx) error {
 func adminRegister(c *fiber.Ctx) error {
 	user := c.Locals("user").(*jwt.Token)
 	if user == nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 	claims := user.Claims.(jwt.MapClaims)
 	if claims["permission"] == nil {
@@ -63,14 +63,14 @@ func adminRegister(c *fiber.Ctx) error {
 	}
 	var admin_new model.Admin
 	if err := c.BodyParser(&admin_new); err != nil {
-		return c.SendStatus(fiber.StatusNotAcceptable)
+		return c.SendStatus(fiber.StatusNotFound)
 	}
 	has, err := engin.Exist(&model.Admin{Username: admin_new.Username})
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	if has {
-		return c.SendStatus(999)
+		return c.SendStatus(fiber.StatusNotFound)
 	}
 	if admin_new.Permission > 1 {
 		return c.SendStatus(fiber.StatusNotAcceptable)

@@ -36,11 +36,11 @@ func searchOutsidersBySearch(c *fiber.Ctx) error {
 	}
 	limit, err := c.ParamsInt("limit")
 	if err != nil {
-		return c.SendStatus(fiber.StatusBadGateway)
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	offset, err := c.ParamsInt("offset")
 	if err != nil {
-		return c.SendStatus(fiber.StatusBadGateway)
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	if limit != 0 {
 		session.Limit(limit, offset)
@@ -50,19 +50,17 @@ func searchOutsidersBySearch(c *fiber.Ctx) error {
 	phone := c.FormValue("phone")
 	from_apply_enter_time := c.FormValue("from_apply_enter_time")
 	to_apply_enter_time := c.FormValue("to_apply_enter_time")
-	if name != "" || phone != "" || from_apply_enter_time != "" || to_apply_enter_time != "" {
-		if name != "" {
-			session = session.Where("name = ?", name)
-		}
-		if phone != "" {
-			session = session.Where("phone = ?", phone)
-		}
-		if from_apply_enter_time != "" {
-			session = session.Where("apply_entry > ?", from_apply_enter_time)
-		}
-		if from_apply_enter_time != "" {
-			session = session.Where("apply_entry > ?", from_apply_enter_time)
-		}
+	if name != "" {
+		session = session.Where("name = ?", name)
+	}
+	if phone != "" {
+		session = session.Where("phone = ?", phone)
+	}
+	if from_apply_enter_time != "" {
+		session = session.Where("apply_entry > ?", from_apply_enter_time)
+	}
+	if to_apply_enter_time != "" {
+		session = session.Where("apply_entry < ?", to_apply_enter_time)
 	}
 	if err := session.Find(&outsiders); err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
@@ -89,16 +87,16 @@ func getOutsiders(c *fiber.Ctx) error {
 func updateTime(c *fiber.Ctx) error {
 	user := c.Locals("user").(*jwt.Token)
 	if user == nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 	claims := user.Claims.(jwt.MapClaims)
 	if claims["permission"] == nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 	permission := int(claims["permission"].(float64))
 	admin_id := int(claims["id"].(float64))
 	if permission != 0 {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 	col := c.Params("time_col")
 	id := c.Params("id")
@@ -114,27 +112,27 @@ func updateTime(c *fiber.Ctx) error {
 	_, err = engin.Table(new(model.Outsiders)).ID(id).Update(
 		map[string]interface{}{admin_what: admin_id, col: time.Now()})
 	if err != nil {
-		return err
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
-	return c.SendStatus(fiber.StatusAccepted)
+	return c.SendStatus(fiber.StatusOK)
 }
 
 //Server
 func updatePass(c *fiber.Ctx, p int) error {
 	user := c.Locals("user").(*jwt.Token)
 	if user == nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 	claims := user.Claims.(jwt.MapClaims)
 	if claims["username"] == nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 	id := c.Params("id")
 	username := claims["username"].(string)
 	var outsider model.Outsiders
 	has, err := engin.Where("id = ?", id).Get(&outsider)
 	if err != nil {
-		return err
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	if !has || username != outsider.Guarantor_id {
 		return c.SendStatus(fiber.StatusBadRequest)
@@ -142,7 +140,7 @@ func updatePass(c *fiber.Ctx, p int) error {
 	outsider.Pass = p
 	_, err = engin.Id(outsider.Id).Cols("pass").Update(&outsider)
 	if err != nil {
-		return err
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	return c.SendStatus(fiber.StatusOK)
 }
@@ -158,23 +156,25 @@ func nopass(c *fiber.Ctx) error {
 func addOutsiders(c *fiber.Ctx) error {
 	var outsider model.Outsiders
 	if err := c.BodyParser(&outsider); err != nil {
-		return err
+		return c.SendStatus(fiber.StatusBadRequest)
 	}
 	if has, err := engin.Exist(&model.Guarantor{Username: outsider.Guarantor_id, Name: outsider.Guarantor_name}); err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	} else if !has {
-		return c.SendStatus(fiber.StatusMethodNotAllowed)
+		return c.SendStatus(fiber.StatusNotFound)
 	}
 	str := time.Now().String()
 	var build strings.Builder
 	for i := 5; i < 19; i += 3 {
-		build.WriteString(str[i : i+2])
+		if _, err := build.WriteString(str[i : i+2]); err != nil {
+			return c.SendStatus(fiber.StatusInternalServerError)
+		}
 	}
 	build.WriteString(str[20:27])
 	outsider.Id = build.String() +
 		outsider.IDCard[len(outsider.IDCard)-4:len(outsider.IDCard)]
 	if _, err := engin.InsertOne(&outsider); err != nil {
-		return err
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
-	return c.SendStatus(fiber.StatusAccepted)
+	return c.SendStatus(fiber.StatusCreated)
 }
