@@ -7,6 +7,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var engin *xorm.Engine
@@ -34,6 +35,20 @@ func DB() *xorm.Engine {
 	if err != nil {
 		fmt.Println(err)
 		panic(err.Error())
+	}
+	if has, err := engin.Exist(&Admin{Username: "admin"}); err != nil {
+		panic(err)
+	} else if has {
+		return engin
+	}
+	admin := Admin{Username: "root", Password: "root", Name: "root", Permission: 1}
+	hash, err := bcrypt.GenerateFromPassword([]byte(admin.Password), bcrypt.DefaultCost)
+	if err != nil {
+		panic(err)
+	}
+	admin.Password = string(hash)
+	if _, err := engin.InsertOne(&admin); err != nil {
+		panic(err)
 	}
 	return engin
 }

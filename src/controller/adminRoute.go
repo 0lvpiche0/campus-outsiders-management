@@ -44,7 +44,7 @@ func adminLogin(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
-	return c.JSON(fiber.Map{"token": t, "username": admin.Username, "permission": admin.Permission})
+	return c.JSON(fiber.Map{"token": t, "username": admin.Username, "permission": admin.Permission, "name": admin.Name})
 }
 
 func adminRegister(c *fiber.Ctx) error {

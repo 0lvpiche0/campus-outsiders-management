@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/form3tech-oss/jwt-go"
+	"github.com/go-xorm/xorm"
 	"github.com/gofiber/fiber/v2"
 	"github.com/lipincheng/campus-outsiders-management/src/model"
 )
@@ -16,17 +17,77 @@ import (
 // 	app.Get("/outsiders/:ID_card", searchOutsidersByID_card)
 // }
 
-func searchOutsidersByID_card(c *fiber.Ctx) error {
+func searchOutsidersBySearch(c *fiber.Ctx) error {
 	ID_card := c.Params("ID_card")
-	var outsider model.Outsiders
-	has, err := engin.Where("ID_card = ?", ID_card).Desc("apply_entry").Get(&outsider)
+	session := new(xorm.Session)
+	session = session.Desc("apply_entry")
+	is_condition := false
+	limit, err := c.ParamsInt("limit")
 	if err != nil {
-		return c.SendStatus(fiber.StatusInternalServerError)
-	}
-	if !has {
 		return c.SendStatus(fiber.StatusBadGateway)
 	}
-	return c.JSON(outsider)
+	offset, err := c.ParamsInt("offset")
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadGateway)
+	}
+	if limit != 0 {
+		session.Limit(limit, offset)
+	}
+	var outsiders []model.Outsiders
+	if ID_card != "" {
+		is_condition = true
+		session = session.Where("ID_card = ?", ID_card)
+	}
+	name := c.FormValue("name")
+	phone := c.FormValue("phone")
+	from_apply_enter_time := c.FormValue("from_apply_enter_time")
+	to_apply_enter_time := c.FormValue("to_apply_enter_time")
+	if name != "" || phone != "" || from_apply_enter_time != "" || to_apply_enter_time != "" {
+		is_condition = true
+		user := c.Locals("user").(*jwt.Token)
+		if user == nil {
+			return c.SendStatus(fiber.StatusUnauthorized)
+		}
+		claims := user.Claims.(jwt.MapClaims)
+		if claims["permission"] == nil {
+			return c.SendStatus(fiber.StatusUnauthorized)
+		}
+		if name != "" {
+			session = session.Where("name = ?", name)
+		}
+		if phone != "" {
+			session = session.Where("phone = ?", phone)
+		}
+		if from_apply_enter_time != "" {
+			session = session.Where("apply_entry > ?", from_apply_enter_time)
+		}
+		if from_apply_enter_time != "" {
+			session = session.Where("apply_entry > ?", from_apply_enter_time)
+		}
+	}
+	if !is_condition {
+		return c.SendStatus(888)
+	}
+	if err := session.Find(&outsiders); err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	return c.JSON(outsiders)
+}
+
+func getOutsiders(c *fiber.Ctx) error {
+	user := c.Locals("user").(*jwt.Token)
+	if user == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	claims := user.Claims.(jwt.MapClaims)
+	if claims["permission"] == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	var outsiders []model.Outsiders
+	if err := engin.Find(&outsiders); err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	return c.JSON(outsiders)
 }
 
 func updateTime(c *fiber.Ctx) error {
