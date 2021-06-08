@@ -24,12 +24,12 @@ func SetupRoute(app *fiber.App) {
 	// return {[]ousider}
 	app.Get("/api/v2/outsiders/search", searchOutsidersBySearch)
 
-	// return {"token": token, "username": admin.Username, "permission": admin.Permission}
+	// return {"token": token, "username": admin.Username, "permission": admin.Permission, "permission":admin.Name}
 	// body {username, password}
 	app.Post("/api/v2/admin/token", adminLogin)
 
 	// return {"token": token, "username": guarantor.Username, "name": guarantor.Name}
-	// body {username, password, naem}
+	// body {username, password}
 	app.Post("/api/v2/guarantor/token", guarantorLogin)
 
 	app.Use(jwtware.New(jwtware.Config{
