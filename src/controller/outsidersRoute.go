@@ -164,6 +164,11 @@ func addOutsiders(c *fiber.Ctx) error {
 	if err := c.BodyParser(&outsider); err != nil {
 		return err
 	}
+	if has, err := engin.Exist(&model.Guarantor{Username: outsider.Guarantor_id, Name: outsider.Guarantor_name}); err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	} else if !has {
+		return c.SendStatus(fiber.StatusMethodNotAllowed)
+	}
 	outsider.Id = time.Now().String() + outsider.Phone
 	if _, err := engin.InsertOne(&outsider); err != nil {
 		return err

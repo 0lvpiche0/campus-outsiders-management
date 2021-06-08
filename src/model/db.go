@@ -36,7 +36,7 @@ func DB() *xorm.Engine {
 		fmt.Println(err)
 		panic(err.Error())
 	}
-	if has, err := engin.Exist(&Admin{Username: "admin"}); err != nil {
+	if has, err := engin.Exist(&Admin{Username: "root"}); err != nil {
 		panic(err)
 	} else if has {
 		return engin
