@@ -1,0 +1,120 @@
+<mxfile host="app.diagrams.net" modified="2021-06-08T12:54:56.121Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41" etag="qwnuqNkh9fMUrnwsRKI4" version="14.6.6" type="github">
+  <diagram id="Tzwxmj8X_VCvP_np-ftd" name="Page-1">
+    <mxGraphModel dx="1422" dy="831" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="esyEbr3O3smxumFWzkIw-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-2" target="esyEbr3O3smxumFWzkIw-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-2" value="&lt;br&gt;&lt;br&gt;外来人员&lt;br&gt;outsiders" style="shape=actor;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="70" width="70" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="275" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-4" value="离开校园验证" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="190" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-6" target="esyEbr3O3smxumFWzkIw-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-6" value="&lt;br&gt;门卫&lt;br&gt;admin" style="shape=actor;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="170" width="70" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-8" target="esyEbr3O3smxumFWzkIw-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-8" value="申请池" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="60" y="175" width="60" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-9" value="已进入的申请流" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="180" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-12" target="esyEbr3O3smxumFWzkIw-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-12" target="esyEbr3O3smxumFWzkIw-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-12" value="是否有对应的申请" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="270" width="110" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-13" value="生成异常" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="293.75" width="100" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-14" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="170" y="297.5" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-17" target="esyEbr3O3smxumFWzkIw-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-17" target="esyEbr3O3smxumFWzkIw-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-17" value="申请状态&lt;br&gt;是否为已进入" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="410" width="110" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-18" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="380" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-19" value="生成异常" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="437.5" width="100" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-20" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="170" y="430" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-23" target="esyEbr3O3smxumFWzkIw-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-23" target="esyEbr3O3smxumFWzkIw-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-23" value="检查申请&lt;br&gt;信息是否正常" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="540" width="110" height="102.5" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-24" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="170" y="564.5" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-25" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="510" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-27" target="esyEbr3O3smxumFWzkIw-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-27" value="正常离开" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="571.88" width="130" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-28" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340" y="565" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-30" target="esyEbr3O3smxumFWzkIw-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-30" value="申请状态改为已结束" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="571.88" width="130" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-31" value="已进入的申请" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="520" y="565" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="esyEbr3O3smxumFWzkIw-33" target="esyEbr3O3smxumFWzkIw-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-33" value="更新申请实际离开时间" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="471.25" width="130" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-34" value="已结束的申请" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="670" y="530" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-35" value="申请池" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="632.5" y="369.99" width="65" height="60.01" as="geometry" />
+        </mxCell>
+        <mxCell id="esyEbr3O3smxumFWzkIw-36" value="已结束的申请" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="670" y="437.5" width="80" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

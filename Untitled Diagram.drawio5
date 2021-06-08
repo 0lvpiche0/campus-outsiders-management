@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" modified="2021-06-08T13:14:54.012Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41" etag="Q4WQBF8vR2mCsEuSTE2D" version="14.6.6" type="github">
+  <diagram id="QlEv3ZjS_r0TD6_eDFP3" name="Page-1">
+    <mxGraphModel dx="1422" dy="831" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="AKPrMza57PKEWwLnqWA1-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AKPrMza57PKEWwLnqWA1-1" target="AKPrMza57PKEWwLnqWA1-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-1" value="提交注册信息" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="130" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AKPrMza57PKEWwLnqWA1-2" target="AKPrMza57PKEWwLnqWA1-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AKPrMza57PKEWwLnqWA1-2" target="AKPrMza57PKEWwLnqWA1-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-2" value="基本信息&lt;br&gt;是否合法" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="152.5" y="220" width="105" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-4" value="注册基本信息体" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="190" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="AKPrMza57PKEWwLnqWA1-6" target="AKPrMza57PKEWwLnqWA1-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AKPrMza57PKEWwLnqWA1-6" target="AKPrMza57PKEWwLnqWA1-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-6" value="检测发起者&lt;br&gt;信息是否合法" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="153.75" y="440" width="102.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-8" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="216.25" y="310" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-9" value="打回申请" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="320" width="106" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-11" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="240" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-14" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="460" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AKPrMza57PKEWwLnqWA1-16" target="AKPrMza57PKEWwLnqWA1-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-16" value="实例化注册" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="145" y="350" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-19" value="信息合法的注册" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="410" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AKPrMza57PKEWwLnqWA1-20" target="AKPrMza57PKEWwLnqWA1-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-20" value="信息合法的注册状态变为合法的注册" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="145" y="565" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-23" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="216.25" y="530" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AKPrMza57PKEWwLnqWA1-24" target="AKPrMza57PKEWwLnqWA1-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-24" value="实例化&lt;br&gt;管理员/担保人" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="562" width="105" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-26" value="合法的注册" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="270" y="560" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-29" value="个体信息" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="455" y="560" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AKPrMza57PKEWwLnqWA1-30" value="管理员/担保人&lt;br&gt;admin/guarantor" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="525" y="548" width="105" height="73" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
