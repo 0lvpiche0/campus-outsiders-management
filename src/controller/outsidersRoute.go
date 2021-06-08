@@ -1,12 +1,11 @@
 package controller
 
 import (
-	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
 	"github.com/form3tech-oss/jwt-go"
-	"github.com/go-xorm/xorm"
 	"github.com/gofiber/fiber/v2"
 	"github.com/lipincheng/campus-outsiders-management/src/model"
 )
@@ -20,13 +19,17 @@ import (
 // }
 
 func searchOutsidersBySearch(c *fiber.Ctx) error {
-	ID_card := c.Params("ID_card")
-	session := new(xorm.Session)
+	ID_card := c.FormValue("ID_card")
+	session := engin.NewSession()
 	session = session.Desc("apply_entry")
 	if ID_card != "" {
 		session = session.Where("ID_card = ?", ID_card)
 	} else {
-		user := c.Locals("user").(*jwt.Token)
+		userL := c.Locals("user")
+		if userL == nil {
+			return c.SendStatus(fiber.StatusUnauthorized)
+		}
+		user := userL.(*jwt.Token)
 		if user == nil {
 			return c.SendStatus(fiber.StatusUnauthorized)
 		}
@@ -35,11 +38,11 @@ func searchOutsidersBySearch(c *fiber.Ctx) error {
 			return c.SendStatus(fiber.StatusUnauthorized)
 		}
 	}
-	limit, err := c.ParamsInt("limit")
+	limit, err := strconv.Atoi(c.FormValue("limit", "0"))
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
-	offset, err := c.ParamsInt("offset")
+	offset, err := strconv.Atoi(c.FormValue("offset", "0"))
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
@@ -70,7 +73,11 @@ func searchOutsidersBySearch(c *fiber.Ctx) error {
 }
 
 func getOutsiders(c *fiber.Ctx) error {
-	user := c.Locals("user").(*jwt.Token)
+	userL := c.Locals("user")
+	if userL == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	user := userL.(*jwt.Token)
 	if user == nil {
 		return c.SendStatus(fiber.StatusUnauthorized)
 	}
@@ -86,7 +93,11 @@ func getOutsiders(c *fiber.Ctx) error {
 }
 
 func updateTime(c *fiber.Ctx) error {
-	user := c.Locals("user").(*jwt.Token)
+	userL := c.Locals("user")
+	if userL == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	user := userL.(*jwt.Token)
 	if user == nil {
 		return c.SendStatus(fiber.StatusUnauthorized)
 	}
@@ -120,7 +131,11 @@ func updateTime(c *fiber.Ctx) error {
 
 //Server
 func updatePass(c *fiber.Ctx, p int) error {
-	user := c.Locals("user").(*jwt.Token)
+	userL := c.Locals("user")
+	if userL == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	user := userL.(*jwt.Token)
 	if user == nil {
 		return c.SendStatus(fiber.StatusUnauthorized)
 	}
@@ -174,7 +189,6 @@ func addOutsiders(c *fiber.Ctx) error {
 			return c.SendStatus(fiber.StatusInternalServerError)
 		}
 	}
-	fmt.Println(outsider)
 	build.WriteString(str[20:27])
 	if len(outsider.ID_card) < 18 {
 		return c.SendStatus(fiber.StatusBadRequest)

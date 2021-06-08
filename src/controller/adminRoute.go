@@ -48,7 +48,11 @@ func adminLogin(c *fiber.Ctx) error {
 }
 
 func adminRegister(c *fiber.Ctx) error {
-	user := c.Locals("user").(*jwt.Token)
+	userL := c.Locals("user")
+	if userL == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	user := userL.(*jwt.Token)
 	if user == nil {
 		return c.SendStatus(fiber.StatusUnauthorized)
 	}
