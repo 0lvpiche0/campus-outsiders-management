@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"strings"
 	"time"
 
 	"github.com/form3tech-oss/jwt-go"
@@ -21,7 +22,18 @@ func searchOutsidersBySearch(c *fiber.Ctx) error {
 	ID_card := c.Params("ID_card")
 	session := new(xorm.Session)
 	session = session.Desc("apply_entry")
-	is_condition := false
+	if ID_card != "" {
+		session = session.Where("ID_card = ?", ID_card)
+	} else {
+		user := c.Locals("user").(*jwt.Token)
+		if user == nil {
+			return c.SendStatus(fiber.StatusUnauthorized)
+		}
+		claims := user.Claims.(jwt.MapClaims)
+		if claims["permission"] == nil {
+			return c.SendStatus(fiber.StatusUnauthorized)
+		}
+	}
 	limit, err := c.ParamsInt("limit")
 	if err != nil {
 		return c.SendStatus(fiber.StatusBadGateway)
@@ -34,24 +46,11 @@ func searchOutsidersBySearch(c *fiber.Ctx) error {
 		session.Limit(limit, offset)
 	}
 	var outsiders []model.Outsiders
-	if ID_card != "" {
-		is_condition = true
-		session = session.Where("ID_card = ?", ID_card)
-	}
 	name := c.FormValue("name")
 	phone := c.FormValue("phone")
 	from_apply_enter_time := c.FormValue("from_apply_enter_time")
 	to_apply_enter_time := c.FormValue("to_apply_enter_time")
 	if name != "" || phone != "" || from_apply_enter_time != "" || to_apply_enter_time != "" {
-		is_condition = true
-		user := c.Locals("user").(*jwt.Token)
-		if user == nil {
-			return c.SendStatus(fiber.StatusUnauthorized)
-		}
-		claims := user.Claims.(jwt.MapClaims)
-		if claims["permission"] == nil {
-			return c.SendStatus(fiber.StatusUnauthorized)
-		}
 		if name != "" {
 			session = session.Where("name = ?", name)
 		}
@@ -64,9 +63,6 @@ func searchOutsidersBySearch(c *fiber.Ctx) error {
 		if from_apply_enter_time != "" {
 			session = session.Where("apply_entry > ?", from_apply_enter_time)
 		}
-	}
-	if !is_condition {
-		return c.SendStatus(888)
 	}
 	if err := session.Find(&outsiders); err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
@@ -169,7 +165,14 @@ func addOutsiders(c *fiber.Ctx) error {
 	} else if !has {
 		return c.SendStatus(fiber.StatusMethodNotAllowed)
 	}
-	outsider.Id = time.Now().String() + outsider.Phone
+	str := time.Now().String()
+	var build strings.Builder
+	for i := 5; i < 19; i += 3 {
+		build.WriteString(str[i : i+2])
+	}
+	build.WriteString(str[20:27])
+	outsider.Id = build.String() +
+		outsider.IDCard[len(outsider.IDCard)-4:len(outsider.IDCard)]
 	if _, err := engin.InsertOne(&outsider); err != nil {
 		return err
 	}
