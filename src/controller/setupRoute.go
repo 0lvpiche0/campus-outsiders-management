@@ -17,7 +17,7 @@ func SetupRoute(app *fiber.App) {
 	app.Post("/api/v2/outsiders", addOutsiders)
 
 	// if params just is ID_card
-	// according to the ID card, return the application entry time last time
+	// according to the ID card
 	// else need -H "Authorization: Bearer {token}(admin)"
 	// name || from_apply_enter_time || to_apply_enter_time || phone
 	// -> /outsiders/search?name=john&from_apply_enter_time=xxxx
@@ -29,7 +29,7 @@ func SetupRoute(app *fiber.App) {
 	app.Post("/api/v2/admin/token", adminLogin)
 
 	// return {"token": token, "username": guarantor.Username, "name": guarantor.Name}
-	// body {username, password}
+	// body {username, password, naem}
 	app.Post("/api/v2/guarantor/token", guarantorLogin)
 
 	app.Use(jwtware.New(jwtware.Config{
