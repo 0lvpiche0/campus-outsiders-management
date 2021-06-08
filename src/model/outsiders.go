@@ -7,7 +7,7 @@ type Outsiders struct {
 	Name           string    `json:"name" xorm:"name notnull"`
 	Gender         int       `json:"gender" xorm:"gender notnull"` //性别
 	Phone          string    `json:"phone" xorm:"phone notnull"`
-	IDCard         string    `json:"ID_card" xorm:"ID_card notnull"`               //身份证
+	ID_card        string    `json:"ID_card" xorm:"ID_card notnull"`               //身份证
 	Unit_info      string    `json:"unit_info" xorm:"unit_info notnull"`           //单位信息
 	Car_num        string    `json:"car_num" xorm:"car_num"`                       //车牌
 	Cause          string    `json:"cause" xorm:"cause notnull"`                   //申请理由

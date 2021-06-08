@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"strings"
 	"time"
 
@@ -164,15 +165,22 @@ func addOutsiders(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusNotFound)
 	}
 	str := time.Now().String()
+	if len(str) < 27 {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
 	var build strings.Builder
 	for i := 5; i < 19; i += 3 {
 		if _, err := build.WriteString(str[i : i+2]); err != nil {
 			return c.SendStatus(fiber.StatusInternalServerError)
 		}
 	}
+	fmt.Println(outsider)
 	build.WriteString(str[20:27])
+	if len(outsider.ID_card) < 18 {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
 	outsider.Id = build.String() +
-		outsider.IDCard[len(outsider.IDCard)-4:len(outsider.IDCard)]
+		outsider.ID_card[len(outsider.ID_card)-4:len(outsider.ID_card)]
 	if _, err := engin.InsertOne(&outsider); err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
