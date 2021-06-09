@@ -65,10 +65,10 @@ func searchOutsidersBySearch(c *fiber.Ctx) error {
 		session = session.Where("phone = ?", phone)
 	}
 	if from_apply_enter_time != "" {
-		session = session.Where("apply_entry > ?", from_apply_enter_time)
+		session = session.Where("apply_entry >= ?", from_apply_enter_time)
 	}
 	if to_apply_enter_time != "" {
-		session = session.Where("apply_entry < ?", to_apply_enter_time)
+		session = session.Where("apply_entry <= ?", to_apply_enter_time)
 	}
 	if err := session.Find(&outsiders); err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
