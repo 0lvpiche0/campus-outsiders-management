@@ -1,8 +1,11 @@
 {
-    "mysqlDb"   : "campus-outsiders-management",
+    "DB" :"mysql",
+    "DBname"   : "campus-outsiders-management",
     "username"  : "root",
-    "password"  : "lipincheng",
+    "password"  : "lpc2526181",
     "charset"   : "utf8",
     "parseTime" : "true",
-    "loc"       : "Local"
+    "loc":"Local",
+    "ip" : "localhost", 
+    "port" : "3306"
 }
