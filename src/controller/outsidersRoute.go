@@ -121,7 +121,7 @@ func updateTime(c *fiber.Ctx) error {
 	case "actual_entry":
 		admin_what = "entry_admin_id"
 	case "actual_leave":
-		admin_what = "actual_admin_id"
+		admin_what = "leave_admin_id"
 	default:
 		return c.SendStatus(fiber.StatusBadRequest)
 	}

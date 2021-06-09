@@ -25,7 +25,8 @@ func DB() *xorm.Engine {
 	if err != nil {
 		panic(err.Error())
 	}
-	dbstr := config.Username + ":" + config.Password + "@/" + config.MysqlDb + "?charset" + config.Charset
+	dbstr := config.Username + ":" + config.Password + "@/" + config.MysqlDb + "?charset=" + config.Charset +
+		"&parseTime = " + config.ParseTime + "&Loc = " + config.Loc
 	engin, err = xorm.NewEngine("mysql", dbstr)
 	if err != nil {
 		fmt.Println(err)

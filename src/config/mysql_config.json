@@ -1,6 +1,8 @@
 {
-    "mysqlDb"  : "campus-outsiders-management",
-    "username" : "root",
-    "password" : "lipincheng",
-    "charset"  : "utf8"
+    "mysqlDb"   : "campus-outsiders-management",
+    "username"  : "root",
+    "password"  : "lipincheng",
+    "charset"   : "utf8",
+    "parseTime" : "true",
+    "loc"       : "Local"
 }
