@@ -49,7 +49,7 @@ func SetupRoute(app *fiber.App) {
 	//return ten unapproved applications(most)
 	// {[]model.Outsiders}
 	// -H "Authorization: Bearer {token}"
-	app.Get("/api/v2/guarantor/:username/outsiers", guarantorGetOutsiders)
+	app.Get("/api/v2/guarantor/:username/outsiders", guarantorGetOutsiders)
 
 	// modify outsider -> pass/no pass
 	// -H "Authorization: Bearer {token}"

@@ -2,7 +2,7 @@
     "DB" :"mysql",
     "DBname"   : "campus-outsiders-management",
     "username"  : "root",
-    "password"  : "lpc2526181",
+    "password"  : "******",
     "charset"   : "utf8",
     "parseTime" : "true",
     "loc":"Local",
