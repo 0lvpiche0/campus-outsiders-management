@@ -19,24 +19,28 @@ import (
 // }
 
 func searchOutsidersBySearch(c *fiber.Ctx) error {
-	ID_card := c.FormValue("ID_card")
+	userL := c.Locals("user")
+	if userL == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	user := userL.(*jwt.Token)
+	if user == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	claims := user.Claims.(jwt.MapClaims)
+	if claims["permission"] == nil && claims["ID_card"] == nil {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+	var ID_card string
+	if claims["ID_card"] == nil {
+		ID_card = c.FormValue("ID_card")
+	} else {
+		ID_card = claims["ID_card"].(string)
+	}
 	session := engin.NewSession()
 	session = session.Desc("apply_entry")
 	if ID_card != "" {
 		session = session.Where("ID_card = ?", ID_card)
-	} else {
-		userL := c.Locals("user")
-		if userL == nil {
-			return c.SendStatus(fiber.StatusUnauthorized)
-		}
-		user := userL.(*jwt.Token)
-		if user == nil {
-			return c.SendStatus(fiber.StatusUnauthorized)
-		}
-		claims := user.Claims.(jwt.MapClaims)
-		if claims["permission"] == nil {
-			return c.SendStatus(fiber.StatusUnauthorized)
-		}
 	}
 	limit, err := strconv.Atoi(c.FormValue("limit", "0"))
 	if err != nil {
@@ -199,4 +203,23 @@ func addOutsiders(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	return c.SendStatus(fiber.StatusCreated)
+}
+
+func outsidersLogin(c *fiber.Ctx) error {
+	name := c.FormValue("name")
+	ID_card := c.FormValue("ID_card")
+	if has, err := engin.Where("name = ? and ID_card = ?", name, ID_card).Exist(); err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	} else if !has {
+		return c.SendStatus(fiber.StatusNotFound)
+	}
+	token := jwt.New(jwt.SigningMethodHS256)
+	claims := token.Claims.(jwt.MapClaims)
+	claims["ID_card"] = ID_card
+	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
+	t, err := token.SignedString([]byte("liwangyipinchengfan"))
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"token": t, "ID_card": ID_card, "name": name})
 }

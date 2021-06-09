@@ -16,13 +16,7 @@ func SetupRoute(app *fiber.App) {
 	// body {outsiders(notnull)}
 	app.Post("/api/v2/outsiders", addOutsiders)
 
-	// if params just is ID_card
-	// according to the ID card
-	// else need -H "Authorization: Bearer {token}(admin)"
-	// name || from_apply_enter_time || to_apply_enter_time || phone
-	// -> /outsiders/search?name=john&from_apply_enter_time=xxxx
-	// return {[]ousider}
-	app.Get("/api/v2/outsiders/search", searchOutsidersBySearch)
+	app.Post("/api/v2/outsiders/token", outsidersLogin)
 
 	// return {"token": token, "username": admin.Username, "permission": admin.Permission, "permission":admin.Name}
 	// body {username, password}
@@ -35,6 +29,12 @@ func SetupRoute(app *fiber.App) {
 	app.Use(jwtware.New(jwtware.Config{
 		SigningKey: []byte("liwangyipinchengfan"),
 	}))
+
+	// need -H "Authorization: Bearer {token}(admin)"
+	// name || from_apply_enter_time || to_apply_enter_time || phone || ID_card
+	// -> /outsiders/search?name=john&from_apply_enter_time=xxxx
+	// return {[]ousider}
+	app.Get("/api/v2/outsiders/search", searchOutsidersBySearch)
 
 	app.Get("/api/v2/outsiders", getOutsiders)
 
